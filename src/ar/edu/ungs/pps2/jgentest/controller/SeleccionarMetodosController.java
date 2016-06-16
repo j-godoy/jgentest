@@ -38,7 +38,8 @@ public class SeleccionarMetodosController
 			_spoonedClass = new SpoonedClass(_javaFilePath);
 		} catch (Exception e)
 		{
-			ViewUtils.alertException("Se ha producido un error al cargar la clase " + _javaFilePath, e);
+			ViewUtils.alertException("Se ha producido un error al cargar la clase " + _javaFilePath, e, _vista);
+			salir();
 			return;
 		}
 		_spoonedMethods = _spoonedClass.getAllMethods();
@@ -73,7 +74,8 @@ public class SeleccionarMetodosController
 		} catch (Exception e)
 		{
 			e.printStackTrace();
-			ViewUtils.alertException("Error inesperado al agregar clase al classPath", e);
+			ViewUtils.alertException("Error inesperado al agregar clase al classPath", e, _vista);
+			salir();
 			return;
 		}
 
@@ -87,7 +89,8 @@ public class SeleccionarMetodosController
 
 		if (selectedMethods.isEmpty())
 		{
-			ViewUtils.alertWarning("Operación no permitida", "Debe seleccionar al menos un método!");
+			ViewUtils.alertWarning("Operación no permitida", "Debe seleccionar al menos un método!", _vista);
+			salir();
 			return;
 		}
 
@@ -103,7 +106,8 @@ public class SeleccionarMetodosController
 				|| _vista.getProfundidadCiclos().getText().replaceAll("[0]*", "").isEmpty())
 		{
 			ViewUtils.alertWarning("Operación no permitida",
-					"Debe ingresar un número mayor a cero en el campo \"Profundidad\" ciclos");
+					"Debe ingresar un número mayor a cero en el campo \"Profundidad\" ciclos", _vista);
+			salir();
 			return;
 		}
 
@@ -115,8 +119,21 @@ public class SeleccionarMetodosController
 		} catch (IOException e2)
 		{
 			e2.printStackTrace();
-			ViewUtils.alertException("Error al copiar el archivo!", e2);
+			ViewUtils.alertException("Error al copiar el archivo!", e2, _vista);
+			salir();
 			return;
+		}
+
+		_vista.getBtnGenerarTest().setText("Generando Test...");
+		_vista.update(_vista.getGraphics());
+		try
+		{
+			Thread.sleep(2000);
+			System.out.println("AAAAAA");
+		} catch (InterruptedException e2)
+		{
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
 		}
 
 		String testClass = null;
@@ -126,47 +143,56 @@ public class SeleccionarMetodosController
 		} catch (IOException e1)
 		{
 			e1.printStackTrace();
-			ViewUtils.alertException("Error al realizar una acción con un archivo!", e1);
+			ViewUtils.alertException("Error al realizar una acción con un archivo!", e1, _vista);
+			salir();
 			return;
 		} catch (NoSuchMethodException e)
 		{
 			e.printStackTrace();
-			ViewUtils.alertException("Error! No se pudo encontrar un método!", e);
+			ViewUtils.alertException("Error! No se pudo encontrar un método!", e, _vista);
+			salir();
 			return;
 		} catch (ClassNotFoundException e)
 		{
 			e.printStackTrace();
-			ViewUtils.alertException("Error! No se pudo encontrar una clase!", e);
+			ViewUtils.alertException("Error! No se pudo encontrar una clase!", e, _vista);
+			salir();
 			return;
 		} catch (InstantiationException e)
 		{
 			e.printStackTrace();
-			ViewUtils.alertException("Error al instanciar la clase!", e);
+			ViewUtils.alertException("Error al instanciar la clase!", e, _vista);
+			salir();
 			return;
 		} catch (IllegalAccessException e)
 		{
 			e.printStackTrace();
-			ViewUtils.alertException("Error! La clase no es accesible!", e);
+			ViewUtils.alertException("Error! La clase no es accesible!", e, _vista);
+			salir();
 			return;
 		} catch (NoSuchFieldException e)
 		{
 			e.printStackTrace();
-			ViewUtils.alertException("Error! No se pudo encontrar un atributo de la clase!", e);
+			ViewUtils.alertException("Error! No se pudo encontrar un atributo de la clase!", e, _vista);
+			salir();
 			return;
 		} catch (InvocationTargetException e)
 		{
 			e.printStackTrace();
-			ViewUtils.alertException("Error al ejecutar el método!", e);
+			ViewUtils.alertException("Error al ejecutar el método!", e, _vista);
+			salir();
 			return;
 		} catch (LoadSpoonException e)
 		{
 			e.printStackTrace();
-			ViewUtils.alertException(e.getMessage(), e);
+			ViewUtils.alertException(e.getMessage(), e, _vista);
+			salir();
 			return;
 		} catch (InvalidPathException e)
 		{
 			e.printStackTrace();
-			ViewUtils.alertException(e.getMessage(), e);
+			ViewUtils.alertException(e.getMessage(), e, _vista);
+			salir();
 			return;
 		}
 
@@ -179,17 +205,24 @@ public class SeleccionarMetodosController
 			sf.store();
 			ViewUtils.alertInformation("Se ha almacenado la clase " + classToTestName + "Test",
 					"Se han generado correctamente " + generator.getGeneratedMethodsCount()
-							+ " métodos y fueron almacenados en el directorio " + pathToSave);
+							+ " métodos y fueron almacenados en el directorio " + pathToSave,
+					_vista);
 		} catch (IOException e)
 		{
-			ViewUtils.alertException("Error al guardar la clase con los casos de test (" + classToTestName + "Test)",
-					e);
 			e.printStackTrace();
+			ViewUtils.alertException("Error al guardar la clase con los casos de test (" + classToTestName + "Test)", e,
+					_vista);
+			salir();
 			return;
 		}
 		// TODO: eliminar!
 		System.out.println("Generación finalizada!");
 		_vista.dispose();
+	}
+
+	public void salir()
+	{
+		_vista.getBtnGenerarTest().setText("Generar Casos");
 	}
 
 }

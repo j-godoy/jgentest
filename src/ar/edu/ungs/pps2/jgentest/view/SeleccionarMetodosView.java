@@ -27,6 +27,7 @@ public class SeleccionarMetodosView extends JFrame
 	private CheckBoxList					_cbList;
 	private JLabel							_labelClaseSeleccionada;
 	private JTextField						_profundidadCiclos;
+	private JButton							_btnGenerarTest;
 	private SeleccionarMetodosController	_controller;
 	private static SeleccionarMetodosView	INSTANCE;
 
@@ -50,16 +51,16 @@ public class SeleccionarMetodosView extends JFrame
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JButton btnGenerarTest = new JButton("Generar Test!");
-		btnGenerarTest.addActionListener(new ActionListener() {
+		_btnGenerarTest = new JButton("Generar Test!");
+		_btnGenerarTest.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				_controller.generarCasosDeTest();
 			}
 		});
-		btnGenerarTest.setBounds(140, 271, 138, 23);
-		contentPane.add(btnGenerarTest);
+		_btnGenerarTest.setBounds(140, 271, 170, 25);
+		contentPane.add(_btnGenerarTest);
 
 		_cbList = new CheckBoxList();
 		_cbList.setBounds(23, 85, 382, 163);
@@ -149,6 +150,11 @@ public class SeleccionarMetodosView extends JFrame
 	public JTextField getProfundidadCiclos()
 	{
 		return _profundidadCiclos;
+	}
+
+	public JButton getBtnGenerarTest()
+	{
+		return _btnGenerarTest;
 	}
 
 	public void setController(SeleccionarMetodosController seleccionarMetodosController)

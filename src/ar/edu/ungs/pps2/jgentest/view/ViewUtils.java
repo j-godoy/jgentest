@@ -3,67 +3,35 @@ package ar.edu.ungs.pps2.jgentest.view;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class ViewUtils
 {
 
-	public static void alertInformation(String header, String msj)
+	public static void alertInformation(String header, String msj, JFrame frame)
 	{
-		// alert(header, msj, AlertType.INFORMATION);
+		alert(header, msj, JOptionPane.INFORMATION_MESSAGE, frame);
 	}
 
-	public static void alertException(String header, Exception ex)
+	public static void alertException(String header, Exception ex, JFrame frame)
 	{
 		StringWriter sw = new StringWriter();
 		PrintWriter pw = new PrintWriter(sw);
 		ex.printStackTrace(pw);
 		String exceptionText = sw.toString();
 
-		// alert(header, exceptionText, AlertType.ERROR);
-
+		alert(header, exceptionText, JOptionPane.ERROR_MESSAGE, frame);
 	}
 
-	public static void alertWarning(String header, String msj)
+	public static void alertWarning(String header, String msj, JFrame frame)
 	{
-		// alert(header, msj, AlertType.WARNING);
+		alert(header, msj, JOptionPane.WARNING_MESSAGE, frame);
 	}
 
-	private static void alert(String header, String msj, AlertType informationType)
+	private static void alert(String header, String msj, int messageType, JFrame frame)
 	{
-		// Alert alert = new Alert(informationType);
-		// alert.setTitle("Info!");
-		// alert.setHeaderText(header);
-		// if (!(msj.length() > 30))
-		// alert.setContentText(msj);
-		// else
-		// {
-		// addTextArea(alert, msj);
-		// }
-		//
-		// alert.showAndWait();
+		JOptionPane.showMessageDialog(frame, msj, header, messageType);
 	}
 
-	private static void addTextArea(Alert alert, String msj)
-	{
-		// Label label = new Label("Información detallada:");
-		//
-		// TextArea textArea = new TextArea(msj);
-		// textArea.setEditable(false);
-		// textArea.setWrapText(true);
-		//
-		// textArea.setMaxWidth(Double.MAX_VALUE);
-		// textArea.setMaxHeight(Double.MAX_VALUE);
-		// GridPane.setVgrow(textArea, Priority.ALWAYS);
-		// GridPane.setHgrow(textArea, Priority.ALWAYS);
-		//
-		// GridPane expContent = new GridPane();
-		// expContent.setMaxWidth(Double.MAX_VALUE);
-		// expContent.add(label, 0, 0);
-		// expContent.add(textArea, 0, 1);
-		//
-		// // Set expandable Exception into the dialog pane.
-		// alert.getDialogPane().setExpandableContent(expContent);
-	}
 }
