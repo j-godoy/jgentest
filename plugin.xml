@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            objectClass="org.eclipse.core.resources.IFile"
+            id="ar.edu.ungs.pps2.jgentest.contribution1">
+         <menu
+               label="JGenTest"
+               path="additions"
+               id="ar.edu.ungs.pps2.jgentest.menu1">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               label="Seleccionar Métodos"
+               class="ar.edu.ungs.pps2.jgentest.popup.actions.OptionsBeforeRun"
+               menubarPath="ar.edu.ungs.pps2.jgentest.menu1/group1"
+               enablesFor="1"
+               id="ar.edu.ungs.pps2.jgentest.newAction">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>
