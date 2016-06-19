@@ -126,15 +126,6 @@ public class SeleccionarMetodosController
 
 		_vista.getBtnGenerarTest().setText("Generando Test...");
 		_vista.update(_vista.getGraphics());
-		try
-		{
-			Thread.sleep(2000);
-			System.out.println("AAAAAA");
-		} catch (InterruptedException e2)
-		{
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
 
 		String testClass = null;
 		try
@@ -144,6 +135,13 @@ public class SeleccionarMetodosController
 		{
 			e1.printStackTrace();
 			ViewUtils.alertException("Error al realizar una acción con un archivo!", e1, _vista);
+			salir();
+			return;
+		} 
+		catch (NullPointerException e)
+		{
+			e.printStackTrace();
+			ViewUtils.alertException("Error!", e, _vista);
 			salir();
 			return;
 		} catch (NoSuchMethodException e)

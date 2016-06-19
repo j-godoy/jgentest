@@ -133,12 +133,20 @@ public class CompilerTool
 
 		// get system compiler:
 		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-
+		
 		// for compilation diagnostic message processing on compilation
 		// WARNING/ERROR
 		MyDiagnosticListener c = new MyDiagnosticListener();
 
-		StandardJavaFileManager fileManager = compiler.getStandardFileManager(c, Locale.ENGLISH, null);
+		StandardJavaFileManager fileManager = null;
+		
+		try {
+			fileManager = compiler.getStandardFileManager(c, Locale.ENGLISH, null);			
+		} catch (NullPointerException e) {
+			throw e;
+		} catch (Exception e) {
+			throw e;
+		}
 
 		try
 		{
