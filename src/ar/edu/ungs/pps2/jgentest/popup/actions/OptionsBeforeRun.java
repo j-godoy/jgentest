@@ -1,6 +1,10 @@
 package ar.edu.ungs.pps2.jgentest.popup.actions;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IActionDelegate;
@@ -18,6 +22,7 @@ public class OptionsBeforeRun implements IObjectActionDelegate
 {
 
 	// private Shell shell;
+	private static IProject actualProject;
 
 	/**
 	 * Constructor for Action1.
@@ -42,14 +47,16 @@ public class OptionsBeforeRun implements IObjectActionDelegate
 	{
 		String javaFilePath = null;
 		String projectFilePath = null;
+		actualProject = null;
 		IWorkbenchWindow windowWorkbench = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		if (windowWorkbench != null)
 		{
 			for (IWorkbenchPage wp : windowWorkbench.getPages())
 			{
 				IFile fileSelected = wp.getActiveEditor().getEditorInput().getAdapter(IFile.class);
-				javaFilePath = fileSelected.getLocation().toString();
-				projectFilePath = fileSelected.getProject().getLocation().toString();
+				javaFilePath = fileSelected.getLocation().toOSString();
+				actualProject = fileSelected.getProject();
+				projectFilePath = actualProject.getLocation().toOSString();
 			}
 		}
 
@@ -59,6 +66,7 @@ public class OptionsBeforeRun implements IObjectActionDelegate
 		SeleccionarMetodosView smv = SeleccionarMetodosView.getInstance();
 		SeleccionarMetodosController controller = new SeleccionarMetodosController(smv);
 		controller.init();
+
 	}
 
 	/**
@@ -67,6 +75,11 @@ public class OptionsBeforeRun implements IObjectActionDelegate
 	@Override
 	public void selectionChanged(IAction action, ISelection selection)
 	{
+	}
+
+	public static void updateWorkspace() throws CoreException
+	{
+		actualProject.refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
 	}
 
 }
