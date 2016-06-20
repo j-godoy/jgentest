@@ -6,6 +6,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Set;
 
+import com.microsoft.z3.Z3Exception;
+
 import ar.edu.ungs.pps2.jgentest.exceptions.InvalidPathException;
 import ar.edu.ungs.pps2.jgentest.exceptions.LoadSpoonException;
 import ar.edu.ungs.pps2.jgentest.functions.CompilerTool;
@@ -48,7 +50,7 @@ public class UTGenerator
 
 	public String generarCasos(int k) throws LoadSpoonException, NoSuchMethodException, IOException,
 			ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchFieldException,
-			InvocationTargetException, InvalidPathException
+			InvocationTargetException, InvalidPathException, Z3Exception
 	{
 
 		_testClass = new TestGenerator(Utils.getSimpleJavaFileName(_javaFilePath), this._packageClass);
