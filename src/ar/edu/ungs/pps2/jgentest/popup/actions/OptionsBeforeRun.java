@@ -48,8 +48,8 @@ public class OptionsBeforeRun implements IObjectActionDelegate
 			for (IWorkbenchPage wp : windowWorkbench.getPages())
 			{
 				IFile fileSelected = wp.getActiveEditor().getEditorInput().getAdapter(IFile.class);
-				javaFilePath = fileSelected.getLocation().toString();
-				projectFilePath = fileSelected.getProject().getLocation().toString();
+				javaFilePath = fileSelected.getLocation().toOSString();
+				projectFilePath = fileSelected.getProject().getLocation().toOSString();
 			}
 		}
 
