@@ -13,6 +13,7 @@ import com.microsoft.z3.FuncDecl;
 import com.microsoft.z3.IntExpr;
 import com.microsoft.z3.Model;
 import com.microsoft.z3.Solver;
+import com.microsoft.z3.Z3Exception;
 import com.singularsys.jep.Jep;
 import com.singularsys.jep.ParseException;
 import com.singularsys.jep.parser.Node;
@@ -23,12 +24,12 @@ public class Z3Solver
 {
 	private Context _ctx;
 
-	public Z3Solver()
+	public Z3Solver() throws Z3Exception
 	{
 		this._ctx = new Context();
 	}
 
-	public Map<String, Integer> getSatisfiableValues(Collection<SymbCondition> conditionsSymb)
+	public Map<String, Integer> getSatisfiableValues(Collection<SymbCondition> conditionsSymb) throws Z3Exception
 	{
 		Map<String, Integer> mapValues = new HashMap<String, Integer>();
 		Solver solver = this._ctx.mkSolver();
@@ -72,7 +73,7 @@ public class Z3Solver
 		return mapValues;
 	}
 
-	public BoolExpr getZ3BoolExpression(String expr)
+	public BoolExpr getZ3BoolExpression(String expr) throws Z3Exception
 	{
 		Jep j = new Jep();
 		Node n;
@@ -87,7 +88,7 @@ public class Z3Solver
 		return (BoolExpr) makeZ3Expression(n);
 	}
 
-	public Expr makeZ3Expression(Node node)
+	public Expr makeZ3Expression(Node node) throws Z3Exception
 	{
 
 		// si es (exp1 != exp2) haces dos llamados recursivos exp1'=makeZ3(exp1)

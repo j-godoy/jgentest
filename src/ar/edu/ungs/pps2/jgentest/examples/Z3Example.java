@@ -7,11 +7,12 @@ import com.microsoft.z3.IntExpr;
 import com.microsoft.z3.Model;
 import com.microsoft.z3.Solver;
 import com.microsoft.z3.Status;
+import com.microsoft.z3.Z3Exception;
 
 public class Z3Example
 {
 
-	public static void main(String[] args)
+	public static void main(String[] args) throws Z3Exception
 	{
 		Context ctx = new Context();
 		Solver s = ctx.mkSolver();

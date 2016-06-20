@@ -12,6 +12,7 @@ import com.microsoft.z3.ArithExpr;
 import com.microsoft.z3.BoolExpr;
 import com.microsoft.z3.Context;
 import com.microsoft.z3.IntExpr;
+import com.microsoft.z3.Z3Exception;
 
 import ar.edu.ungs.pps2.jgentest.model.SymbCondition;
 import ar.edu.ungs.pps2.jgentest.model.Z3Solver;
@@ -20,7 +21,7 @@ public class Z3SolverTest
 {
 
 	@Test
-	public void getZ3Expression()
+	public void getZ3Expression() throws Z3Exception
 	{
 		Z3Solver z3 = new Z3Solver();
 
@@ -36,7 +37,7 @@ public class Z3SolverTest
 	}
 
 	@Test
-	public void getZ3Expression2()
+	public void getZ3Expression2() throws Z3Exception
 	{
 		Z3Solver z3 = new Z3Solver();
 
@@ -50,7 +51,7 @@ public class Z3SolverTest
 	}
 
 	@Test
-	public void getZ3Expression3()
+	public void getZ3Expression3() throws Z3Exception
 	{
 		Z3Solver z3 = new Z3Solver();
 
@@ -64,7 +65,7 @@ public class Z3SolverTest
 	}
 
 	@Test
-	public void getZ3Expression4()
+	public void getZ3Expression4() throws Z3Exception
 	{
 		Z3Solver z3 = new Z3Solver();
 
@@ -78,7 +79,7 @@ public class Z3SolverTest
 	}
 
 	@Test
-	public void getZ3Expression5()
+	public void getZ3Expression5() throws Z3Exception
 	{
 		Z3Solver z3 = new Z3Solver();
 
@@ -93,7 +94,7 @@ public class Z3SolverTest
 	}
 
 	@Test
-	public void getZ3Expression6()
+	public void getZ3Expression6() throws Z3Exception
 	{
 		Z3Solver z3 = new Z3Solver();
 
@@ -108,7 +109,7 @@ public class Z3SolverTest
 	}
 
 	@Test
-	public void getZ3Expression7()
+	public void getZ3Expression7() throws Z3Exception
 	{
 		Z3Solver z3 = new Z3Solver();
 
@@ -126,7 +127,7 @@ public class Z3SolverTest
 	}
 
 	@Test
-	public void getZ3Expression8()
+	public void getZ3Expression8() throws Z3Exception
 	{
 		Z3Solver z3 = new Z3Solver();
 
@@ -147,7 +148,7 @@ public class Z3SolverTest
 	}
 
 	@Test
-	public void getZ3Expression9()
+	public void getZ3Expression9() throws Z3Exception
 	{
 		Z3Solver z3 = new Z3Solver();
 
@@ -161,7 +162,7 @@ public class Z3SolverTest
 	}
 
 	@Test
-	public void getZ3Expression10()
+	public void getZ3Expression10() throws Z3Exception
 	{
 		Z3Solver z3 = new Z3Solver();
 
@@ -177,7 +178,7 @@ public class Z3SolverTest
 	}
 
 	@Test
-	public void getZ3Expression11()
+	public void getZ3Expression11() throws Z3Exception
 	{
 		Z3Solver z3 = new Z3Solver();
 		List<SymbCondition> conditionsSymb = new ArrayList<>();

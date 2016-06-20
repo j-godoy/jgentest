@@ -12,5 +12,13 @@ public class Main
 		Instrumentator instrument = new Instrumentator(path);
 		instrument.showStatements("m2");
 	}
+	
+	public int m(int x)
+	{
+		if( x> 0)
+			return 1;
+		else
+			return -1;
+	}
 
 }
