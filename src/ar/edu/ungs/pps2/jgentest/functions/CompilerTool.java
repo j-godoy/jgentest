@@ -22,10 +22,9 @@ import javax.tools.StandardJavaFileManager;
 import javax.tools.StandardLocation;
 import javax.tools.ToolProvider;
 
-import com.singularsys.jep.parser.Node;
-
 import ar.edu.ungs.pps2.jgentest.exceptions.InvalidPathException;
-import ar.edu.ungs.pps2.jgentest.model.ConcolicExpression;
+import ar.edu.ungs.pps2.jgentest.parameters.Parameters;
+import ar.edu.ungs.pps2.jgentest.view.ViewUtils;
 
 /**
  * Dynamic java class compiler and executer <br>
@@ -53,6 +52,11 @@ public class CompilerTool
 			System.out.println("Message->" + diagnostic.getMessage(Locale.ENGLISH));
 			System.out.println("Source->" + diagnostic.getSource());
 			System.out.println(" ");
+			ViewUtils.alertInformation("compilerError",
+					"Line Number->" + diagnostic.getLineNumber() + "\n" + "code->" + diagnostic.getCode() + "\n"
+							+ "Message->" + diagnostic.getMessage(Locale.ENGLISH) + "\n" + "Source->"
+							+ diagnostic.getSource(),
+					null);
 		}
 	}
 
@@ -60,7 +64,6 @@ public class CompilerTool
 			throws ClassNotFoundException, MalformedURLException, InvalidPathException
 	{
 		CompileFile(className, sourceCode, classOutputFolder);
-
 		// 3.Load your class by URLClassLoader, then instantiate the instance,
 		// and call method by reflection
 		return LoadClass(className, classOutputFolder);
@@ -163,17 +166,35 @@ public class CompilerTool
 		return task.call();
 	}
 
-	private static Iterable<? extends File> getFilesToAddClassPath()
+	private static Iterable<? extends File> getFilesToAddClassPath() throws InvalidPathException
 	{
 		List<File> files = new ArrayList<>();
-		final File f = new File(
-				ConcolicExpression.class.getProtectionDomain().getCodeSource().getLocation().getPath() + "/bin");
-		final File s = new File(Node.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+		File jgenFile = new File(Parameters.getProjectPath() + "jgentestPlugin" + File.separator + "jgen.jar");
+		File jepTrialFile = new File(
+				Parameters.getProjectPath() + "jgentestPlugin" + File.separator + "jep-java-3.4-trial.jar");
 
-		files.add(s);
-		files.add(f);
+		if (!jgenFile.exists())
+			throw new InvalidPathException("Asegurese de tener jgentestPlugin" + File.separator + "jgen.jar"
+					+ " en el directorio de su proyecto");
 
+		if (!jepTrialFile.exists())
+			throw new InvalidPathException("Asegurese de tener jgentestPlugin" + File.separator
+					+ "jep-java-3.4-trial.jar" + " en el directorio de su proyecto");
+
+		files.add(jgenFile);
+		files.add(jepTrialFile);
 		return files;
+		// final File f = new
+		// File(ConcolicExpression.class.getProtectionDomain().getCodeSource().getLocation().getPath()
+		// + File.separator + "bin");
+		// final File s = new
+		// File(Node.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+		//
+		// files.add(s);
+		// files.add(f);
+		// ViewUtils.alertInformation("file s: ", s.getAbsolutePath(), null);
+		// ViewUtils.alertInformation("file f: ", f.getAbsolutePath(), null);
+		// return files;
 	}
 
 	/**
@@ -205,7 +226,8 @@ public class CompilerTool
 		return loader.loadClass(className);
 	}
 
-	public static void addFilesToClassPath() throws Exception
+	public static void addFilesToClassPath() throws InvalidPathException, NoSuchMethodException, SecurityException,
+			IllegalAccessException, IllegalArgumentException, InvocationTargetException, MalformedURLException
 	{
 		Iterable<? extends File> files = getFilesToAddClassPath();
 		for (File file : files)
