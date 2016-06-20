@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.microsoft.z3.Z3Exception;
+
 import ar.edu.ungs.pps2.jgentest.exceptions.InvalidPathException;
 import ar.edu.ungs.pps2.jgentest.exceptions.LoadSpoonException;
 import ar.edu.ungs.pps2.jgentest.functions.CompilerTool;
@@ -188,6 +190,11 @@ public class SeleccionarMetodosController
 			return;
 		} catch (InvalidPathException e)
 		{
+			e.printStackTrace();
+			ViewUtils.alertException(e.getMessage(), e, _vista);
+			salir();
+			return;
+		} catch (Z3Exception e) {
 			e.printStackTrace();
 			ViewUtils.alertException(e.getMessage(), e, _vista);
 			salir();
