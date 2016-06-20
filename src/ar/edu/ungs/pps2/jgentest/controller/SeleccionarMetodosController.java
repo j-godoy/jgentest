@@ -7,12 +7,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.core.runtime.CoreException;
+
 import ar.edu.ungs.pps2.jgentest.exceptions.InvalidPathException;
 import ar.edu.ungs.pps2.jgentest.exceptions.LoadSpoonException;
 import ar.edu.ungs.pps2.jgentest.functions.CompilerTool;
 import ar.edu.ungs.pps2.jgentest.model.SpoonedClass;
 import ar.edu.ungs.pps2.jgentest.model.UTGenerator;
 import ar.edu.ungs.pps2.jgentest.parameters.Parameters;
+import ar.edu.ungs.pps2.jgentest.popup.actions.OptionsBeforeRun;
 import ar.edu.ungs.pps2.jgentest.utils.StoreFile;
 import ar.edu.ungs.pps2.jgentest.view.SeleccionarMetodosView;
 import ar.edu.ungs.pps2.jgentest.view.ViewUtils;
@@ -71,6 +74,12 @@ public class SeleccionarMetodosController
 		try
 		{
 			CompilerTool.addFilesToClassPath();
+		} catch (InvalidPathException e3)
+		{
+			e3.printStackTrace();
+			ViewUtils.alertException(e3.getMessage(), e3, _vista);
+			salir();
+			return;
 		} catch (Exception e)
 		{
 			e.printStackTrace();
@@ -126,15 +135,6 @@ public class SeleccionarMetodosController
 
 		_vista.getBtnGenerarTest().setText("Generando Test...");
 		_vista.update(_vista.getGraphics());
-		try
-		{
-			Thread.sleep(2000);
-			System.out.println("AAAAAA");
-		} catch (InterruptedException e2)
-		{
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
 
 		String testClass = null;
 		try
@@ -215,8 +215,14 @@ public class SeleccionarMetodosController
 			salir();
 			return;
 		}
-		// TODO: eliminar!
-		System.out.println("Generación finalizada!");
+		try
+		{
+			OptionsBeforeRun.updateWorkspace();
+		} catch (CoreException e)
+		{
+			e.printStackTrace();
+			ViewUtils.alertException("Se ha producido un error al actualizar el proyecto-workspace", e, null);
+		}
 		_vista.dispose();
 	}
 
