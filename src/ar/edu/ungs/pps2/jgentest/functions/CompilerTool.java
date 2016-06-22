@@ -26,6 +26,7 @@ import com.singularsys.jep.parser.Node;
 
 import ar.edu.ungs.pps2.jgentest.exceptions.InvalidPathException;
 import ar.edu.ungs.pps2.jgentest.model.ConcolicExpression;
+import ar.edu.ungs.pps2.jgentest.view.ViewUtils;
 
 /**
  * Dynamic java class compiler and executer <br>
@@ -59,7 +60,8 @@ public class CompilerTool
 	public static Class<?> CompileAndGetClass(String className, String sourceCode, String classOutputFolder)
 			throws ClassNotFoundException, MalformedURLException, InvalidPathException
 	{
-		CompileFile(className, sourceCode, classOutputFolder);
+		boolean c = CompileFile(className, sourceCode, classOutputFolder);
+		ViewUtils.alertInformation("se compilo?", c+"", null);
 
 		// 3.Load your class by URLClassLoader, then instantiate the instance,
 		// and call method by reflection
