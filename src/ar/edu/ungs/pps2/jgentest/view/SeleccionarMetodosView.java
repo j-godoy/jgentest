@@ -43,6 +43,9 @@ public class SeleccionarMetodosView extends JFrame
 	 */
 	private SeleccionarMetodosView()
 	{
+		setIconImage(Toolkit.getDefaultToolkit().getImage(SeleccionarMetodosView.class.getResource("/junit/runner/smalllogo.gif")));
+		setFont(new Font("Arial", Font.PLAIN, 12));
+		setAlwaysOnTop(true);
 		setResizable(false);
 		setTitle("JGenTest: Generar casos de Test automáticos");
 		setBounds(100, 100, 450, 350);
@@ -63,12 +66,12 @@ public class SeleccionarMetodosView extends JFrame
 		contentPane.add(_btnGenerarTest);
 
 		_cbList = new CheckBoxList();
-		_cbList.setBounds(23, 85, 382, 163);
+		_cbList.setBounds(23, 85, 390, 163);
 		contentPane.add(_cbList);
 
 		JLabel lblClaseSeleccionada = new JLabel("Clase seleccionada:");
-		lblClaseSeleccionada.setFont(new Font("Arial", Font.BOLD, 11));
-		lblClaseSeleccionada.setBounds(23, 18, 120, 16);
+		lblClaseSeleccionada.setFont(new Font("Arial", Font.PLAIN, 11));
+		lblClaseSeleccionada.setBounds(23, 18, 134, 16);
 		contentPane.add(lblClaseSeleccionada);
 
 		_claseSeleccionada = new JTextField();
@@ -78,13 +81,13 @@ public class SeleccionarMetodosView extends JFrame
 		_claseSeleccionada.setColumns(10);
 
 		_labelClaseSeleccionada = new JLabel("\"Profundidad\" Ciclos:");
-		_labelClaseSeleccionada.setFont(new Font("Arial", Font.BOLD, 11));
-		_labelClaseSeleccionada.setBounds(23, 46, 120, 16);
+		_labelClaseSeleccionada.setFont(new Font("Arial", Font.PLAIN, 11));
+		_labelClaseSeleccionada.setBounds(23, 46, 134, 16);
 		contentPane.add(_labelClaseSeleccionada);
 
 		_profundidadCiclos = new JTextField();
 		_profundidadCiclos.setColumns(10);
-		_profundidadCiclos.setBounds(167, 40, 58, 28);
+		_profundidadCiclos.setBounds(167, 45, 58, 18);
 		contentPane.add(_profundidadCiclos);
 	}
 
