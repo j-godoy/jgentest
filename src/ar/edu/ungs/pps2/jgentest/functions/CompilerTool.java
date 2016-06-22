@@ -24,6 +24,7 @@ import javax.tools.ToolProvider;
 
 import ar.edu.ungs.pps2.jgentest.exceptions.InvalidPathException;
 import ar.edu.ungs.pps2.jgentest.parameters.Parameters;
+import ar.edu.ungs.pps2.jgentest.model.ConcolicExpression;
 import ar.edu.ungs.pps2.jgentest.view.ViewUtils;
 
 /**
@@ -64,6 +65,7 @@ public class CompilerTool
 			throws ClassNotFoundException, MalformedURLException, InvalidPathException
 	{
 		CompileFile(className, sourceCode, classOutputFolder);
+
 		// 3.Load your class by URLClassLoader, then instantiate the instance,
 		// and call method by reflection
 		return LoadClass(className, classOutputFolder);
