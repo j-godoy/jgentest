@@ -8,6 +8,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IActionDelegate;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
@@ -17,6 +18,7 @@ import org.eclipse.ui.PlatformUI;
 import ar.edu.ungs.pps2.jgentest.controller.SeleccionarMetodosController;
 import ar.edu.ungs.pps2.jgentest.parameters.Parameters;
 import ar.edu.ungs.pps2.jgentest.view.SeleccionarMetodosView;
+import ar.edu.ungs.pps2.jgentest.view.ViewUtils;
 
 public class OptionsBeforeRun implements IObjectActionDelegate
 {
@@ -44,6 +46,8 @@ public class OptionsBeforeRun implements IObjectActionDelegate
 	@Override
 	public void run(IAction action)
 	{
+		SeleccionarMetodosView.reset();
+
 		String javaFilePath = null;
 		String projectFilePath = null;
 		actualProject = null;
@@ -52,7 +56,13 @@ public class OptionsBeforeRun implements IObjectActionDelegate
 		{
 			for (IWorkbenchPage wp : windowWorkbench.getPages())
 			{
-				IFile fileSelected = wp.getActiveEditor().getEditorInput().getAdapter(IFile.class);
+				IEditorPart activeEditor = wp.getActiveEditor();
+				if (activeEditor == null)
+				{
+					ViewUtils.alertWarning("un momento!", "Debe tener un abierto .java en el editor", null);
+					return;
+				}
+				IFile fileSelected = activeEditor.getEditorInput().getAdapter(IFile.class);
 				javaFilePath = fileSelected.getLocation().toOSString();
 
 				actualProject = fileSelected.getProject();

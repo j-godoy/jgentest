@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -17,6 +18,7 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import ar.edu.ungs.pps2.jgentest.controller.SeleccionarMetodosController;
+import ar.edu.ungs.pps2.jgentest.parameters.Parameters;
 
 public class SeleccionarMetodosView extends JFrame
 {
@@ -25,7 +27,6 @@ public class SeleccionarMetodosView extends JFrame
 	private JPanel							contentPane;
 	private JTextField						_claseSeleccionada;
 	private CheckBoxList					_cbList;
-	private JLabel							_labelClaseSeleccionada;
 	private JTextField						_profundidadCiclos;
 	private JButton							_btnGenerarTest;
 	private SeleccionarMetodosController	_controller;
@@ -38,12 +39,30 @@ public class SeleccionarMetodosView extends JFrame
 		return INSTANCE;
 	}
 
+	public static void reset()
+	{
+		// Aplico lookAndFeel "Nimbus"
+		for (UIManager.LookAndFeelInfo laf : UIManager.getInstalledLookAndFeels())
+		{
+			if ("Nimbus".equals(laf.getName()))
+				try
+				{
+					UIManager.setLookAndFeel(laf.getClassName());
+				} catch (Exception ex)
+				{
+					ex.printStackTrace();
+				}
+		}
+		INSTANCE = null;
+	}
+
 	/**
 	 * Create the frame.
 	 */
 	private SeleccionarMetodosView()
 	{
-		setIconImage(Toolkit.getDefaultToolkit().getImage(SeleccionarMetodosView.class.getResource("/junit/runner/smalllogo.gif")));
+		ImageIcon image = new ImageIcon(Parameters.getProjectPath() + "jgentestPlugin/img/ungs.png");
+		setIconImage(image.getImage());
 		setFont(new Font("Arial", Font.PLAIN, 12));
 		setAlwaysOnTop(true);
 		setResizable(false);
@@ -80,14 +99,14 @@ public class SeleccionarMetodosView extends JFrame
 		contentPane.add(_claseSeleccionada);
 		_claseSeleccionada.setColumns(10);
 
-		_labelClaseSeleccionada = new JLabel("\"Profundidad\" Ciclos:");
-		_labelClaseSeleccionada.setFont(new Font("Arial", Font.PLAIN, 11));
-		_labelClaseSeleccionada.setBounds(23, 46, 134, 16);
-		contentPane.add(_labelClaseSeleccionada);
+		JLabel labelProfundidadCiclos = new JLabel("\"Profundidad\" Ciclos:");
+		labelProfundidadCiclos.setFont(new Font("Arial", Font.PLAIN, 11));
+		labelProfundidadCiclos.setBounds(23, 45, 134, 16);
+		contentPane.add(labelProfundidadCiclos);
 
 		_profundidadCiclos = new JTextField();
 		_profundidadCiclos.setColumns(10);
-		_profundidadCiclos.setBounds(167, 45, 58, 18);
+		_profundidadCiclos.setBounds(167, 40, 40, 28);
 		contentPane.add(_profundidadCiclos);
 	}
 
@@ -96,18 +115,6 @@ public class SeleccionarMetodosView extends JFrame
 	 */
 	public void open(String javaFileName)
 	{
-		// Aplico lookAndFeel "Nimbus"
-		for (UIManager.LookAndFeelInfo laf : UIManager.getInstalledLookAndFeels())
-		{
-			if ("Nimbus".equals(laf.getName()))
-				try
-				{
-					UIManager.setLookAndFeel(laf.getClassName());
-				} catch (Exception ex)
-				{
-				}
-		}
-
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run()
