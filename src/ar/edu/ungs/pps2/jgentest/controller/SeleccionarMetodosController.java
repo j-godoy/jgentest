@@ -148,7 +148,8 @@ public class SeleccionarMetodosController
 			ViewUtils.alertException("Error al realizar una acción con un archivo!", e1, _vista);
 			salir();
 			return;
-		} catch (NullPointerException e)
+		} 
+		catch (NullPointerException e)
 		{
 			e.printStackTrace();
 			ViewUtils.alertException("Error!", e, _vista);
@@ -202,8 +203,7 @@ public class SeleccionarMetodosController
 			ViewUtils.alertException(e.getMessage(), e, _vista);
 			salir();
 			return;
-		} catch (Z3Exception e)
-		{
+		} catch (Z3Exception e) {
 			e.printStackTrace();
 			ViewUtils.alertException(e.getMessage(), e, _vista);
 			salir();
