@@ -6,6 +6,7 @@
          point="org.eclipse.ui.popupMenus">
       <objectContribution
             adaptable="true"
+            nameFilter="*.java"
             objectClass="org.eclipse.core.resources.IFile"
             id="ar.edu.ungs.pps2.jgentest.contribution1">
          <menu
