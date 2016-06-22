@@ -149,6 +149,8 @@ public class CompilerTool
 			fileManager = compiler.getStandardFileManager(c, Locale.ENGLISH, null);
 		} catch (NullPointerException e)
 		{
+			if(compiler == null)
+				throw new NullPointerException("Asegurese de utilizar el JDK para este proyecto. ToolProvider.getSystemJavaCompiler() devuelve null");
 			throw e;
 		} catch (Exception e)
 		{
