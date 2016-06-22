@@ -20,7 +20,6 @@ import ar.edu.ungs.pps2.jgentest.view.SeleccionarMetodosView;
 
 public class OptionsBeforeRun implements IObjectActionDelegate
 {
-
 	// private Shell shell;
 	private static IProject actualProject;
 
@@ -55,6 +54,7 @@ public class OptionsBeforeRun implements IObjectActionDelegate
 			{
 				IFile fileSelected = wp.getActiveEditor().getEditorInput().getAdapter(IFile.class);
 				javaFilePath = fileSelected.getLocation().toOSString();
+
 				actualProject = fileSelected.getProject();
 				projectFilePath = actualProject.getLocation().toOSString();
 			}
