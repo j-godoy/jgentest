@@ -24,7 +24,6 @@ import javax.tools.ToolProvider;
 
 import ar.edu.ungs.pps2.jgentest.exceptions.InvalidPathException;
 import ar.edu.ungs.pps2.jgentest.parameters.Parameters;
-import ar.edu.ungs.pps2.jgentest.model.ConcolicExpression;
 import ar.edu.ungs.pps2.jgentest.view.ViewUtils;
 
 /**
@@ -53,7 +52,7 @@ public class CompilerTool
 			System.out.println("Message->" + diagnostic.getMessage(Locale.ENGLISH));
 			System.out.println("Source->" + diagnostic.getSource());
 			System.out.println(" ");
-			ViewUtils.alertInformation("compilerError",
+			ViewUtils.alertInformation("Error al compilar clase instrumentada",
 					"Line Number->" + diagnostic.getLineNumber() + "\n" + "code->" + diagnostic.getCode() + "\n"
 							+ "Message->" + diagnostic.getMessage(Locale.ENGLISH) + "\n" + "Source->"
 							+ diagnostic.getSource(),
@@ -64,8 +63,7 @@ public class CompilerTool
 	public static Class<?> CompileAndGetClass(String className, String sourceCode, String classOutputFolder)
 			throws ClassNotFoundException, MalformedURLException, InvalidPathException
 	{
-		boolean c = CompileFile(className, sourceCode, classOutputFolder);
-		ViewUtils.alertInformation("se compilo?", c+"", null);
+		CompileFile(className, sourceCode, classOutputFolder);
 
 		// 3.Load your class by URLClassLoader, then instantiate the instance,
 		// and call method by reflection
@@ -139,18 +137,21 @@ public class CompilerTool
 
 		// get system compiler:
 		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-		
+
 		// for compilation diagnostic message processing on compilation
 		// WARNING/ERROR
 		MyDiagnosticListener c = new MyDiagnosticListener();
 
 		StandardJavaFileManager fileManager = null;
-		
-		try {
-			fileManager = compiler.getStandardFileManager(c, Locale.ENGLISH, null);			
-		} catch (NullPointerException e) {
+
+		try
+		{
+			fileManager = compiler.getStandardFileManager(c, Locale.ENGLISH, null);
+		} catch (NullPointerException e)
+		{
 			throw e;
-		} catch (Exception e) {
+		} catch (Exception e)
+		{
 			throw e;
 		}
 
