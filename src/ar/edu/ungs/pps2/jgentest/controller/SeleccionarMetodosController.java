@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.core.runtime.CoreException;
+
 import com.microsoft.z3.Z3Exception;
 
 import ar.edu.ungs.pps2.jgentest.exceptions.InvalidPathException;
@@ -146,8 +148,7 @@ public class SeleccionarMetodosController
 			ViewUtils.alertException("Error al realizar una acción con un archivo!", e1, _vista);
 			salir();
 			return;
-		} 
-		catch (NullPointerException e)
+		} catch (NullPointerException e)
 		{
 			e.printStackTrace();
 			ViewUtils.alertException("Error!", e, _vista);
@@ -201,7 +202,8 @@ public class SeleccionarMetodosController
 			ViewUtils.alertException(e.getMessage(), e, _vista);
 			salir();
 			return;
-		} catch (Z3Exception e) {
+		} catch (Z3Exception e)
+		{
 			e.printStackTrace();
 			ViewUtils.alertException(e.getMessage(), e, _vista);
 			salir();
