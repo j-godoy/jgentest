@@ -9,6 +9,8 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
+import com.microsoft.z3.Z3Exception;
+
 import ar.edu.ungs.pps2.jgentest.model.IOSolutionTest;
 import ar.edu.ungs.pps2.jgentest.model.SymbCondition;
 import ar.edu.ungs.pps2.jgentest.model.Z3Solver;
@@ -31,7 +33,7 @@ public class InstrumentedMethod
 	@SuppressWarnings("unchecked")
 	public List<IOSolutionTest> generateInputs(String methodName, Class<?>... parameterTypes)
 			throws InstantiationException, IllegalAccessException, NoSuchMethodException, NoSuchFieldException,
-			InvocationTargetException
+			InvocationTargetException, Z3Exception
 	{
 		_ioSolutionTest = new ArrayList<>();
 		Object clazz;
