@@ -7,8 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.core.runtime.CoreException;
-
 import com.microsoft.z3.Z3Exception;
 
 import ar.edu.ungs.pps2.jgentest.exceptions.InvalidPathException;
