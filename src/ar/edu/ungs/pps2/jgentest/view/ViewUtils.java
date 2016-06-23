@@ -31,8 +31,10 @@ public class ViewUtils
 
 	private static void alert(String header, String msj, int messageType, JFrame frame)
 	{
-		// JOptionPane.showMessageDialog(frame, msj, header, messageType);
-		CustomJDialog.show(frame, msj, header, messageType);
+		if (msj.length() <= 300)
+			JOptionPane.showMessageDialog(frame, msj, header, messageType);
+		else
+			CustomJDialog.show(frame, msj, header, messageType);
 	}
 
 }
