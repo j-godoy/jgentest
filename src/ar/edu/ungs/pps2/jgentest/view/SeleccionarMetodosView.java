@@ -1,5 +1,6 @@
 package ar.edu.ungs.pps2.jgentest.view;
 
+import java.awt.Dialog;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -39,7 +40,10 @@ public class SeleccionarMetodosView extends JFrame
 		return INSTANCE;
 	}
 
-	public static void reset()
+	/**
+	 * Create the frame.
+	 */
+	private SeleccionarMetodosView()
 	{
 		// Aplico lookAndFeel "Nimbus"
 		for (UIManager.LookAndFeelInfo laf : UIManager.getInstalledLookAndFeels())
@@ -53,18 +57,12 @@ public class SeleccionarMetodosView extends JFrame
 					ex.printStackTrace();
 				}
 		}
-		INSTANCE = null;
-	}
 
-	/**
-	 * Create the frame.
-	 */
-	private SeleccionarMetodosView()
-	{
 		ImageIcon image = new ImageIcon(Parameters.getProjectPath() + "jgentestPlugin/img/ungs.png");
 		setIconImage(image.getImage());
 		setFont(new Font("Arial", Font.PLAIN, 12));
 		setAlwaysOnTop(true);
+		setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
 		setResizable(false);
 		setTitle("JGenTest: Generar casos de Test automáticos");
 		setBounds(100, 100, 450, 350);
