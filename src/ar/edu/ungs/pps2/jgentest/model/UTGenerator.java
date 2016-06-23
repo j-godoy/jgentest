@@ -66,7 +66,7 @@ public class UTGenerator
 		System.out.println("Instrumentando...");
 		// XXXXXXX: Después instrumento los métodos a partir del
 		// preprocesamiento anterior
-		Instrumentator instrumentator = new Instrumentator(Parameters.getJavaPathPreProcessClass());
+		Instrumentator instrumentator = new Instrumentator(Parameters.getJavaPathPreProcessClass(), true);
 		for (CtMethod<?> actualMethod : _methods)
 		{
 			List<CtTypeReference<?>> typeReferences = SpoonUtils.getTypeReferences(actualMethod);
@@ -75,7 +75,7 @@ public class UTGenerator
 		ctInstrumentedClass = instrumentator.getInstrumentedClass();
 
 		// XXXXXXX: Guardo la clase instrumentada
-		storeClass(ctInstrumentedClass, Parameters.getJavaPathInstrumentedClass() + File.separator);
+		storeClass(ctInstrumentedClass, Parameters.getJavaPathInstrumentedClass(), Parameters.INSTRUMENT);
 
 		// XXXXXXX: Compilo la clase instrumentada y la cargo
 		Class<?> instrumentedClass = null;
@@ -119,20 +119,22 @@ public class UTGenerator
 	private void instrumentPreProcess(CtMethod<?> actualMethod, int k)
 			throws NoSuchMethodException, IOException, LoadSpoonException
 	{
-		Instrumentator instrumentator = new Instrumentator(Parameters.getJavaPathPreProcessClass());
+		Instrumentator instrumentator = new Instrumentator(Parameters.getJavaPathPreProcessClass(), false);
 
 		List<CtTypeReference<?>> typeReferences = SpoonUtils.getTypeReferences(actualMethod);
 
 		if (instrumentator.preProcess(actualMethod.getSimpleName(), typeReferences, k))
 		{
-			storeClass(instrumentator.getInstrumentedClass(), Parameters.getJavaPathPreProcessClass());
+			storeClass(instrumentator.getInstrumentedClass(), Parameters.getJavaPathPreProcessClass(),
+					Parameters.PREPROCESS);
 			instrumentPreProcess(actualMethod, k);
 			return;
 		}
 
 		if (instrumentator.preProcessLoop(actualMethod.getSimpleName(), typeReferences, k))
 		{
-			storeClass(instrumentator.getInstrumentedClass(), Parameters.getJavaPathPreProcessClass());
+			storeClass(instrumentator.getInstrumentedClass(), Parameters.getJavaPathPreProcessClass(),
+					Parameters.PREPROCESS);
 			instrumentPreProcess(actualMethod, k);
 			return;
 		}
@@ -144,12 +146,12 @@ public class UTGenerator
 		return this._testClass.getGeneratedMethodsCount();
 	}
 
-	private void storeClass(CtClass<?> ctClas, String pathToSave) throws IOException
+	private void storeClass(CtClass<?> ctClas, String pathToSave, String packageName) throws IOException
 	{
-		String className = ctClas.getSimpleName();
+		String FileName = ctClas.getSimpleName();
 
-		String Stringclass = "package " + "instrument" + ";\n" + ctClas.toString();
-		StoreFile sf = new StoreFile(pathToSave + "/", Parameters.JAVA_EXTENSION, Stringclass, className,
+		String contentClass = "package " + packageName + ";\n\n" + ctClas.toString();
+		StoreFile sf = new StoreFile(pathToSave + "/", Parameters.JAVA_EXTENSION, contentClass, FileName,
 				StoreFile.CHARSET_UTF8);
 		sf.store();
 	}

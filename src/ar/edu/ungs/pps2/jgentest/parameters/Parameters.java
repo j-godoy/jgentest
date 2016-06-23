@@ -10,14 +10,16 @@ public class Parameters
 	 * que necesito generar
 	 */
 	private static final String	TMP_PATH							= "tmp";
+	public final static String	PREPROCESS							= "preprocess";
+	public final static String	INSTRUMENT							= "instrument";
 	/**
 	 * path de la carpeta donde se almacenarán los .java preprocesados
 	 */
-	private final static String	TMP_PATH_JAVA_PREPROCESS_CLASS		= TMP_PATH + File.separator + "preprocess";
+	private final static String	TMP_PATH_JAVA_PREPROCESS_CLASS		= TMP_PATH + File.separator + PREPROCESS;
 	/**
 	 * path de la carpeta donde se almacenarán los .java instrumentados
 	 */
-	private final static String	TMP_PATH_JAVA_INSTRUMENTED_CLASS	= TMP_PATH + File.separator + "instrument";
+	private final static String	TMP_PATH_JAVA_INSTRUMENTED_CLASS	= TMP_PATH + File.separator + INSTRUMENT;
 	/**
 	 * path de la carpeta donde se almacenarán los .class (clase instrumentada
 	 * compilada)

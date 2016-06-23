@@ -54,14 +54,15 @@ public class Instrumentator
 	 * @param factory
 	 * @throws LoadSpoonException
 	 */
-	public Instrumentator(String javaPathFileToinstrument) throws LoadSpoonException
+	public Instrumentator(String javaPathFileToinstrument, boolean addFieldsClass) throws LoadSpoonException
 	{
 		_spoonedClass = null;
 
 		_spoonedClass = new SpoonedClass(javaPathFileToinstrument);
 		_instrumentedClass = _spoonedClass.getSpoonedClass();
 		_factory = _spoonedClass.getFactory();
-		this.addFieldClass();
+		if (addFieldsClass)
+			this.addFieldClass();
 	}
 
 	private void addFieldClass()
