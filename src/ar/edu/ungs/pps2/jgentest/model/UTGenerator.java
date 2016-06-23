@@ -106,7 +106,7 @@ public class UTGenerator
 		// Borro las carpeta y clases que creé en el preprocesamiento e
 		// instrumentación
 		// TODO: cambiar a TEMP_FILES.borrar!!!!
-		if (_borrarTemporales.compareTo(TEMP_FILES.MANTENER) == 0)
+		if (_borrarTemporales.compareTo(TEMP_FILES.BORRAR) == 0)
 		{
 			Utils.delete(new File(Parameters.getTmpPath()));
 		}
