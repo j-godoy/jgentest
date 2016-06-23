@@ -31,7 +31,8 @@ public class ViewUtils
 
 	private static void alert(String header, String msj, int messageType, JFrame frame)
 	{
-		JOptionPane.showMessageDialog(frame, msj, header, messageType);
+		// JOptionPane.showMessageDialog(frame, msj, header, messageType);
+		CustomJDialog.show(frame, msj, header, messageType);
 	}
 
 }
