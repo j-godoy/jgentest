@@ -46,8 +46,6 @@ public class OptionsBeforeRun implements IObjectActionDelegate
 	@Override
 	public void run(IAction action)
 	{
-		SeleccionarMetodosView.reset();
-
 		String javaFilePath = null;
 		String projectFilePath = null;
 		actualProject = null;
@@ -59,7 +57,7 @@ public class OptionsBeforeRun implements IObjectActionDelegate
 				IEditorPart activeEditor = wp.getActiveEditor();
 				if (activeEditor == null)
 				{
-					ViewUtils.alertWarning("un momento!", "Debe tener un abierto .java en el editor", null);
+					ViewUtils.alertWarning("un momento!", "Debe tener abierto un .java en el editor", null);
 					return;
 				}
 				IFile fileSelected = activeEditor.getEditorInput().getAdapter(IFile.class);
