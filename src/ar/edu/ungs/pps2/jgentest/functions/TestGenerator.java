@@ -82,12 +82,13 @@ public class TestGenerator
 		} else if (returnType.equals("int"))
 		{
 			method.append("\t\tassertEquals(" + ouput + ", " + methodCall + ");\n");
-			method.append("\t\t" + methodCall + ";\n");
+		} else if (returnType.equals("double") || returnType.equals("Double"))
+		{
+			method.append("\t\tassertEquals(" + ouput + ", " + methodCall + "," + "1e-10);\n");
 		} else if (returnType.equals("String"))
 		{
 			method.append("\t\tassertEquals(\"" + ouput + "\", " + methodCall + ");\n");
-			method.append("\t\t" + methodCall + ";\n");
-		} else if (returnType.equals("void"))
+		} else // if (returnType.equals("void"))
 		{
 			method.append("\t\t" + methodCall + ";\n");
 		}
