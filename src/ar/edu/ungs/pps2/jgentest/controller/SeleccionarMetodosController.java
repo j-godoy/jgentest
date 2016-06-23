@@ -52,6 +52,8 @@ public class SeleccionarMetodosController
 
 	public void init()
 	{
+		if (_spoonedClass == null)
+			return;
 		_vista.open(_javaFileName);
 		this.clearListAndCompleteMethods(_spoonedClass.getAllMethods());
 	}
